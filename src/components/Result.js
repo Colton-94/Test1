@@ -10,13 +10,12 @@ const Result = (props) => {
 if(!props)
 return null;
 
-
  return(
      
     <FlatList
     data={props.data}
-    keyExtractor={({ _id }) =>_id}
-    renderItem={({ item }) => (
+    keyExtractor={({ _id, }) =>_id}
+    renderItem={({ item,index }) => (
         
           <View style={styles.container}>
               <View style={styles.container1}>
@@ -34,27 +33,27 @@ return null;
                         <Image style={styles.image} source={{ uri :item.poster}} />
                 </View>
                 <View style={styles.body}>
-                    <Text style={{fontWeight:'400',fontSize:20}}>{item.title}</Text>
-                        <View style={{flexDirection:'row'}}>
+                    <Text style={{fontWeight:'400',fontSize:20,paddingBottom:10}}>{item.title}</Text>
+                        <View ellipsizeMode="tail" style={{flexDirection:'row'}}>
                             <View >
-                                <Text style={{color:'grey',fontSize:12,fontWeight:'700'}}>Genre:</Text>
-                                <Text style={{color:'grey',fontSize:12,fontWeight:'700',alignSelf:'stretch'}}>Director:</Text>
-                                <Text style={{color:'grey',fontSize:12,fontWeight:'700'}}>Starring:</Text>  
+                                <Text style={{color:'grey',fontSize:13,fontWeight:'700',paddingBottom:2}}>Genre:</Text>
+                                <Text style={{color:'grey',fontSize:13,fontWeight:'700',alignSelf:'stretch',paddingBottom:2}}>Director:</Text>
+                                <Text style={{color:'grey',fontSize:13,fontWeight:'700',paddingBottom:2}}>Starring:</Text>  
                             </View>
-                            <View style={{alignItems:'flex-start'}}>
-                                <Text style={{textTransform:'capitalize',fontSize:12}}>{item.genre}</Text>
-                                <Text style={{textAlign:'left',fontSize:12}}>{item.director}</Text>
-                                <Text style={{textAlign:'left',fontSize:12,}}>{item.stars}</Text>
+                            <View ellipsizeMode="tail" style={{alignItems:'flex-start',flexShrink:1}}>
+                                <Text style={{textTransform:'capitalize',fontSize:13, paddingBottom:2}}>{item.genre}</Text>
+                                <Text style={{textAlign:'left',fontSize:13, paddingBottom:2}}>{item.director}</Text>
+                                <Text  numberOfLines={1}  ellipsizeMode='tail' style={{textAlign:'left',fontSize:13,}}>{item.stars}</Text>
                             </View>
                         </View>
                              
-                    <Text style={{fontSize:12}}>Mins|{item.language}|{}</Text>
-                    <Text style={{color:'#007aff',fontSize:12}} >{item.pageViews} Views|Voted by {item.totalVoted} people</Text>
+                    <Text style={{fontSize:13,paddingBottom:2}}>Mins|{item.language}</Text>
+                    <Text style={{color:'#007aff',fontSize:13}} >{item.pageViews} Views|Voted by {item.totalVoted} people</Text>
 
                 </View> 
                  </View>
                         <View style={styles.buttonStyle}>
-                                <Button>
+                                <Button onPress={()=>console.log('index',index)}>
                                  Watch Trailer
                                 </Button>
                         </View>
@@ -68,18 +67,17 @@ return null;
 
 const styles = StyleSheet.create({
     container:{
-        paddingHorizontal:5,
         borderBottomWidth:2,
         borderColor:'#D3D3D3',
-        
+        flex: 1,
+         flexWrap: 'wrap',
+         width:100
         
     },
     container1:{
         flexDirection:'row',
         justifyContent:'space-between',
-        paddingBottom:10,
-        flex:1
-        
+        paddingBottom:10,  
     },
     image:{
         width:65,
@@ -87,27 +85,21 @@ const styles = StyleSheet.create({
         borderRadius:7,
         justifyContent:'center',
         
-        
     },
     buttonStyle:{
         bottom:3,
-        
-    
     },
     body:{
         
         alignContent:'stretch',
         textAlign:'center',
-        paddingHorizontal:5,
-        
-        
-        
+        paddingHorizontal:0,
+       
     },
     votes:{
         alignContent:'center',
         flexDirection:'column',
         justifyContent:'space-evenly',
-        paddingHorizontal:5,
 
     },
     heading:{

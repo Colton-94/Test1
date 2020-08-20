@@ -1,15 +1,10 @@
-import React,{useEffect}from 'react';
+import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+//import { createStackNavigator } from 'react-navigation-stack';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
-import firebase from 'firebase';
 import reduxThunk from 'redux-thunk';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { setNavigator } from './src/components/navigationRef';
-//import { createDrawerNavigator } from '@react-navigation/drawer';
-// i//mport { NavigationContainer } from '@react-navigation/native';
-
 import {createDrawerNavigator} from 'react-navigation-drawer';
 
 
@@ -29,21 +24,15 @@ const SwitchNavigator=createSwitchNavigator({
   SignUp:SignUp,
   SignIn:SignIn,
   drawer,
-    Home:Home 
+  Home:Home 
   },{
     initialRouteName:'Home',
     
 }
 );
- 
-  
-  
-
 const App=createAppContainer(SwitchNavigator);
 
 const store = createStore(reducers,(applyMiddleware(reduxThunk)));
-
-
 
 export default ()=>{
   
